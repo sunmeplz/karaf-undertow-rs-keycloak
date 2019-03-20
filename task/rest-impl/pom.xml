@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <artifactId>karaf-undertow-rs-keycloak-task</artifactId>
+        <groupId>org.github.sunmeplz</groupId>
+        <version>1.0-SNAPSHOT</version>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+
+    <artifactId>karaf-undertow-rs-keycloak-task-rest-impl</artifactId>
+    <packaging>bundle</packaging>
+
+    <properties>
+        <cxf.version>3.2.5</cxf.version>
+        <dosgi.version>2.3.0</dosgi.version>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>javax.inject</groupId>
+            <artifactId>javax.inject</artifactId>
+            <version>1</version>
+            <optional>true</optional>
+        </dependency>
+        <dependency>
+            <groupId>org.github.sunmeplz</groupId>
+            <artifactId>karaf-undertow-rs-keycloak-task-rest-api</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+<!--               <dependency>-->
+<!--            <groupId>org.apache.cxf.dosgi</groupId>-->
+<!--            <artifactId>cxf-dosgi-common</artifactId>-->
+<!--            <version>${dosgi.version}</version>-->
+<!--        </dependency>-->
+        <dependency>
+            <groupId>org.osgi</groupId>
+            <artifactId>osgi.cmpn</artifactId>
+            <version>6.0.0</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.cxf</groupId>
+            <artifactId>cxf-rt-rs-service-description-swagger</artifactId>
+            <version>${cxf.version}</version>
+            <scope>provided</scope>
+        </dependency>
+        <!--<dependency>-->
+        <!--<groupId>org.apache.aries.rsa</groupId>-->
+        <!--<artifactId>org.apache.aries.rsa.spi</artifactId>-->
+        <!--<version>${aries.rsa.version}</version>-->
+        <!--</dependency>-->
+        <dependency>
+            <groupId>com.fasterxml.jackson.jaxrs</groupId>
+            <artifactId>jackson-jaxrs-json-provider</artifactId>
+            <version>2.6.6</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.cxf</groupId>
+            <artifactId>cxf-core</artifactId>
+            <version>${cxf.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.cxf</groupId>
+            <artifactId>cxf-rt-rs-security-cors</artifactId>
+            <version>${cxf.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.cxf</groupId>
+            <artifactId>cxf-rt-features-logging</artifactId>
+            <version>${cxf.version}</version>
+        </dependency>
+
+    </dependencies>
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.felix</groupId>
+                <artifactId>maven-bundle-plugin</artifactId>
+                <extensions>true</extensions>
+
+                <configuration>
+                    <instructions>
+                        <Import-Package>
+                            io.swagger.jaxrs,
+                            *
+                        </Import-Package>
+                        <Export-Package></Export-Package>
+                        <_dsannotations>*</_dsannotations>
+                    </instructions>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+</project>

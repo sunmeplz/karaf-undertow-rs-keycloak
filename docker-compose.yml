@@ -1,0 +1,51 @@
+version: '3'
+volumes:
+  mysql_data:
+#networks:
+#  secure:
+#    external: false
+services:
+  mysql:
+    image: mysql:5.7
+    volumes:
+      - mysql_data:/var/lib/mysql
+    network_mode: host
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: keycloak
+      MYSQL_USER: keycloak
+      MYSQL_PASSWORD: password
+    ports:
+      - 3306:3306
+#    networks:
+#      - secure
+  keycloak:
+    image: jboss/keycloak
+    environment:
+      DB_VENDOR: MYSQL
+      DB_ADDR: localhost
+      DB_PORT: 3306
+      DB_DATABASE: keycloak
+      DB_USER: keycloak
+      DB_PASSWORD: password
+      KEYCLOAK_USER: admin
+      KEYCLOAK_PASSWORD: Pa55w0rd
+      KEYCLOAK_IMPORT: /tmp/test-realm.json
+      # Uncomment the line below if you want to specify JDBC parameters. The parameter below is just an example, and it shouldn't be used in production without knowledge. It is highly recommended that you read the MySQL JDBC driver documentation in order to use it.
+      #JDBC_PARAMS: "connectTimeout=30000"
+#    networks:
+#      - secure
+    volumes:
+      - ./test-realm.json:/tmp/test-realm.json
+    network_mode: host
+    ports:
+      - 8080:8080
+    depends_on:
+      - mysql
+  awersome-api:
+    image: sunmeplz/awersome-api:latest
+    ports:
+      - 8181:8181
+    network_mode: host
+#    networks:
+#      - secure

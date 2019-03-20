@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <artifactId>karaf-undertow-rs-keycloak-karaf</artifactId>
+        <groupId>org.github.sunmeplz</groupId>
+        <version>1.0-SNAPSHOT</version>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+
+    <artifactId>karaf-undertow-rs-keycloak-karaf-distro</artifactId>
+    <packaging>karaf-assembly</packaging>
+
+    <dependencies>
+        <!-- project dependencies -->
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>karaf-undertow-rs-keycloak-karaf-features</artifactId>
+            <version>1.0-SNAPSHOT</version>
+            <type>xml</type>
+            <classifier>features</classifier>
+            <scope>runtime</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.karaf.features</groupId>
+            <artifactId>framework</artifactId>
+            <version>${karaf.version}</version>
+            <type>kar</type>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.karaf.features</groupId>
+            <artifactId>standard</artifactId>
+            <version>${karaf.version}</version>
+            <type>xml</type>
+            <classifier>features</classifier>
+            <scope>runtime</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.karaf.features</groupId>
+            <artifactId>enterprise</artifactId>
+            <version>${karaf.version}</version>
+            <type>xml</type>
+            <classifier>features</classifier>
+            <scope>runtime</scope>
+        </dependency>
+
+    </dependencies>
+
+    <build>
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+                <filtering>true</filtering>
+            </resource>
+        </resources>
+
+        <plugins>
+            <plugin>
+                <artifactId>maven-resources-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.karaf.tooling</groupId>
+                <artifactId>karaf-maven-plugin</artifactId>
+                <extensions>true</extensions>
+                <configuration>
+
+                    <!-- <startupFeatures/> -->
+                    <installedFeatures>
+                    </installedFeatures>
+                    <bootFeatures>
+                        <feature>minimal</feature>
+                        <feature>sunmeplz-undertow-rs-keycloak</feature>
+                    </bootFeatures>
+                    <!--<blacklistedFeatures>-->
+                    <!--&lt;!&ndash; we want to be sure jetty is not used since we are using undertow &ndash;&gt;-->
+                    <!--<feature>jetty</feature>-->
+                    <!--<feature>pax-jetty</feature>-->
+                    <!--<feature>pax-jetty-http2</feature>-->
+                    <!--<feature>pax-http-jetty</feature>-->
+                    <!--<feature>pax-keycloak*</feature>-->
+                    <!--</blacklistedFeatures>-->
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+
+</project>
