@@ -1,6 +1,6 @@
-#This example demostrates how to run web service on apache karaf and secure it with keycloak
+# This example demostrates how to run web service on apache karaf and secure it with keycloak
 
-##Requirements
+## Requirements
 * Java 8
 * Maven >= 3.3.6
 * Docker >=  18.09.2
